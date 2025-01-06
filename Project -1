@@ -1,0 +1,464 @@
+# Shopping-website-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shop</title>
+    <!-- Include Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Default background color */
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        /* Section styles */
+        section {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white; /* Set a white background for sections */
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-bottom: 5px;
+        }
+
+        form input, form select {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #218838;
+        }
+
+        /* Cart styles */
+        #cart ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cart ul li {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 0;
+        }
+
+        #cart p {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Delivery status styles */
+        #status-result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Background colors for specific pages */
+        #login-page {
+            background-color: #e0f7fa; /* Light cyan background for login page */
+        }
+
+        #products-page {
+            background-color: #ffebee; /* Light pink background for products page */
+        }
+
+        #cart-page {
+            background-color: #fff3e0; /* Light orange background for cart page */
+        }
+
+        #delivery-page, #delivery-status-page {
+            background-color: #e8f5e9; /* Light green background for delivery page and status page */
+        }
+
+        #payment-page {
+            background-color: #f3e5f5; /* Light purple background for payment page */
+        }
+
+        /* Icon styles */
+        .icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: block;
+        }
+
+        /* Search input styles */
+        #search-input {
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Payment options styles */
+        .payment-option {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>My Shop</h1>
+        <nav>
+            <ul>
+                <li><a href="#products-page">Products</a></li>
+                <li><a href="#cart-page">Cart</a></li>
+                <li><a href="#delivery-page">Delivery</a></li>
+                <li><a href="#delivery-status-page">Delivery Status</a></li>
+                <li><a href="#login-page">Login</a></li>
+                <li><a href="#payment-page">Payment</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Products Section -->
+        <section id="products-page">
+            <i class="fas fa-box-open icon"></i>
+            <h2>Products</h2>
+            <input type="text" id="search-input" placeholder="Search products...">
+            <div class="product" data-id="1" data-price="500" data-name="Product 1">
+                <h3>Product 1</h3>
+                <p>Price: ₹500</p>
+                <label for="size-1">Size:</label>
+                <select id="size-1" class="product-size">
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                </select>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-id="2" data-price="1500" data-name="Product 2">
+                <h3>Product 2</h3>
+                <p>Price: ₹1500</p>
+                <label for="size-2">Size:</label>
+                <select id="size-2" class="product-size">
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                </select>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <div class="product" data-id="3" data-price="750" data-name="Product 3">
+                <h3>Product 3</h3>
+                <p>Price: ₹750</p>
+                <label for="size-3">Size:</label>
+                <select id="size-3" class="product-size">
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                </select>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <section id="cart-page">
+            <i class="fas fa-shopping-cart icon"></i>
+            <h2>Shopping Cart</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </ul>
+            <p>Total: ₹<span id="total">0</span></p>
+            <button id="checkout-button">Checkout</button>
+        </section>
+
+        <!-- Delivery Section -->
+        <section id="delivery-page">
+            <i class="fas fa-truck icon"></i>
+            <h2>Delivery Information</h2>
+            <form id="delivery-form">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" required>
+
+                <label for="postcode">Postcode:</label>
+                <input type="text" id="postcode" name="postcode" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="country">Country:</label>
+                <input type="text" id="country" name="country" required>
+
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <!-- Delivery Status Section -->
+        <section id="delivery-status-page">
+            <i class="fas fa-info-circle icon"></i>
+            <h2>Delivery Status</h2>
+            <p id="status-message">Enter your order ID to check the status of your delivery.</p>
+            <form id="status-form">
+                <label for="order-id">Order ID:</label>
+                <input type="text" id="order-id" name="order-id" required>
+                <button type="submit">Check Status</button>
+            </form>
+            <div id="status-result"></div>
+        </section>
+
+        <!-- Login Section -->
+        <section id="login-page">
+            <i class="fas fa-user icon"></i>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Login</button>
+            </form>
+        </section>
+
+        <!-- Payment Section -->
+        <section id="payment-page">
+            <i class="fas fa-credit-card icon"></i>
+            <h2>Payment</h2>
+            <form id="payment-form">
+                <label for="payment-method">Payment Method:</label>
+                <select id="payment-method" name="payment-method" required>
+                    <option value="credit-card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <option value="google-pay">Google Pay</option>
+                    <option value="apple-pay">Apple Pay</option>
+                </select>
+
+                <!-- Credit Card Payment Option -->
+                <div id="credit-card-option" class="payment-option">
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" name="card-number">
+
+                    <label for="expiry-date">Expiry Date:</label>
+                    <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY">
+
+                    <label for="cvv">CVV:</label>
+                    <input type="text" id="cvv" name="cvv">
+                </div>
+
+                <!-- PayPal Payment Option -->
+                <div id="paypal-option" class="payment-option">
+                    <p>Pay securely using your PayPal account.</p>
+                </div>
+
+                <!-- Google Pay Payment Option -->
+                <div id="google-pay-option" class="payment-option">
+                    <p>Pay securely using Google Pay.</p>
+                </div>
+
+                <!-- Apple Pay Payment Option -->
+                <div id="apple-pay-option" class="payment-option">
+                    <p>Pay securely using Apple Pay.</p>
+                </div>
+
+                <button type="submit">Pay Now</button>
+            </form>
+        </section>
+    </main>
+
+    <script>
+        const products = [
+            { id: 1, name: 'Product 1', price: 500 },
+            { id: 2, name: 'Product 2', price: 1500 },
+            { id: 3, name: 'Product 3', price: 750 }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+
+            const deliveryForm = document.getElementById('delivery-form');
+            if (deliveryForm) {
+                deliveryForm.addEventListener('submit', event => {
+                    event.preventDefault();
+                    alert('Delivery information submitted!');
+                });
+            }
+
+            const statusForm = document.getElementById('status-form');
+            if (statusForm) {
+                statusForm.addEventListener('submit', event => {
+                    event.preventDefault();
+                    const orderId = document.getElementById('order-id').value;
+                    checkDeliveryStatus(orderId);
+                });
+            }
+
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', event => {
+                    event.preventDefault();
+                    const username = document.getElementById('username').value;
+                    const password = document.getElementById('password').value;
+
+                    // Basic validation
+                    if (username === 'user' && password === 'password') {
+                        alert('Login successful!');
+                        window.location.href = '#products-page'; // Redirect to products section
+                    } else {
+                        alert('Invalid username or password');
+                    }
+                });
+            }
+
+            const paymentForm = document.getElementById('payment-form');
+            const paymentMethodSelect = document.getElementById('payment-method');
+            paymentMethodSelect.addEventListener('change', handlePaymentMethodChange);
+
+            paymentForm.addEventListener('submit', event => {
+                event.preventDefault();
+                alert('Payment processed successfully!');
+            });
+
+            const checkoutButton = document.getElementById('checkout-button');
+            if (checkoutButton) {
+                checkoutButton.addEventListener('click', () => {
+                    alert('Proceeding to checkout...');
+                    window.location.href = '#payment-page'; // Redirect to payment section
+                });
+            }
+
+            const searchInput = document.getElementById('search-input');
+            if (searchInput) {
+                searchInput.addEventListener('input', filterProducts);
+            }
+
+            updateCart();
+        });
+
+        function addToCart(event) {
+            const productId = parseInt(event.target.parentElement.getAttribute('data-id'));
+            const product = products.find(p => p.id === productId);
+            const sizeSelect = event.target.parentElement.querySelector('.product-size');
+            const selectedSize = sizeSelect.value;
+            const productWithSize = { ...product, size: selectedSize };
+            cart.push(productWithSize);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItemsElement = document.getElementById('cart-items');
+            const totalElement = document.getElementById('total');
+            
+            if (cartItemsElement && totalElement) {
+                cartItemsElement.innerHTML = '';
+                let total = 0;
+
+                cart.forEach(product => {
+                    const li = document.createElement('li');
+                    li.textContent = `${product.name} (Size: ${product.size}) - ₹${product.price}`;
+                    cartItemsElement.appendChild(li);
+                    total += product.price;
+                });
+
+                totalElement.textContent = total.toString();
+            }
+        }
+
+        function checkDeliveryStatus(orderId) {
+            // Simulate checking delivery status
+            const statusMessage = `The status of order ID ${orderId} is: Shipped`;
+            document.getElementById('status-result').textContent = statusMessage;
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+            products.forEach(product => {
+                const name = product.getAttribute('data-name').toLowerCase();
+                if (name.includes(query)) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        }
+
+        function handlePaymentMethodChange() {
+            const selectedMethod = document.getElementById('payment-method').value;
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.style.display = 'none';
+            });
+
+            const selectedOption = document.getElementById(`${selectedMethod}-option`);
+            if (selectedOption) {
+                selectedOption.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
